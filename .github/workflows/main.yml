@@ -106,5 +106,6 @@ jobs:
           script: |
             cd ./fitnessportalen/
             export DOCKER_HUB_NAME=${{secrets.DOCKER_HUB_NAME}}
+            docker login -u=${{secrets.DOCKER_USERNAME}} -p=${{secrets.DOCKER_PASSWORD}}
             docker-compose -f docker-compose.prod.yaml pull
             docker-compose -f docker-compose.prod.yaml up -d
