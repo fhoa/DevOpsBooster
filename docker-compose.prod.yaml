@@ -1,0 +1,26 @@
+version: '3.2'
+services:
+  nginx:
+    container_name: nginx
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - '80:80'
+    links:
+      - frontend
+  backend:
+    container_name: backend
+    restart: unless-stopped
+    image: ${DOCKER_HUB_NAME}:backend
+    ports:
+      - '4000:4000'
+  frontend:
+    container_name: frontend
+    restart: unless-stopped
+    image: ${DOCKER_HUB_NAME}:frontend
+    ports:
+      - '3000:3000'
+    links:
+      - backend
